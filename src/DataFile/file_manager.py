@@ -22,12 +22,15 @@ def load_file(file: 'datafile.DataFile', columns : Sequence,
         iter_count = count(0, 1)
         
         def valid_x_value(x):
-            if not str(x).isnumeric():
-                return iter_count.__next__()
-            else:
-                return 0 if x is None else x
+            value = x
+            try:
+               value = float(x)
+            except ValueError:
+                value = iter_count.__next__()
+                
+            return 0 if value is None else value
 
-        converter = {0: valid_x_value}
+        converter = {columns[0]: valid_x_value}
         return genfromtxt(file.path, delimiter=file.delimeter,
                         usecols=columns, skip_header=skip_h,
                         converters=converter, unpack=True,

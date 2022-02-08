@@ -12,20 +12,23 @@ class CommandLineParser:
         parser.add_argument("-f", "--file", 
                             help="data file path (required)", required=True)
         parser.add_argument("-d", "--data",
-                            help="column of measured values (optional)",
+                            help="column of measured values (optional). "
+                            "Defaults to column 1 (0-indexed)",
                             required=False, default=1)
-        parser.add_argument("-i", "--integrate",
-                            help="column to represent the variable of "
-                            "integration (optional)",
+        parser.add_argument("-i", "--interval",
+                            help="column to represent the period of the data "
+                            " (optional). "
+                            "Defaults to column 0 (0-indexed)",
                             required=False, default=0)            
-        parser.add_argument("-x", "--x_label", 
-                            help="label for x-axis (optional)", 
+        parser.add_argument("--source_graph", 
+                            help="\"XLABEL | YLABEL | TITLE\" for the source "
+                            "data graph separated by the '|' character "
+                            "(optional)", 
                             required=False, default=None)
-        parser.add_argument("-y", "--y_label", 
-                            help="label for y-axis (optional)", 
-                            required=False, default=None)
-        parser.add_argument("-t", "--title", 
-                            help="title for graph (optional)", 
+        parser.add_argument("--integrated_graph", 
+                            help="\"XLABEL | YLABEL | TITLE\" for the "
+                            "integrated graph separated by the '|' character "
+                            "(optional)", 
                             required=False, default=None)
 
         return parser.parse_args()
