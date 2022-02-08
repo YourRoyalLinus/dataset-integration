@@ -2,6 +2,7 @@ from _collections_abc import Sequence
 from numpy import ndarray
 from scipy.integrate import cumulative_trapezoid
 
+
 def _strictly_increasing(l: Sequence):
     return all(x < y for x, y in zip(l, l[1:]))
 

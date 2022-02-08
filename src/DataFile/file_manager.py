@@ -1,5 +1,5 @@
-import csv
 from _collections_abc import Sequence
+import csv
 from itertools import count
 from numpy import genfromtxt, ndarray
 from DataFile import datafile

@@ -1,4 +1,3 @@
-import stat
 import argparse
 
 class CommandLineParser:
@@ -21,12 +20,12 @@ class CommandLineParser:
                             "Defaults to column 0 (0-indexed)",
                             required=False, default=0)            
         parser.add_argument("--source_graph", 
-                            help="\"XLABEL | YLABEL | TITLE\" for the source "
-                            "data graph separated by the '|' character "
+                            help="\"XLABEL | YLABEL | TITLE | COLOR\" for the " 
+                            "source data graph separated by the '|' character "
                             "(optional)", 
                             required=False, default=None)
         parser.add_argument("--integrated_graph", 
-                            help="\"XLABEL | YLABEL | TITLE\" for the "
+                            help="\"XLABEL | YLABEL | TITLE | COLOR\" for the "
                             "integrated graph separated by the '|' character "
                             "(optional)", 
                             required=False, default=None)

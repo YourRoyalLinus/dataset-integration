@@ -1,8 +1,15 @@
-from typing import Dict
 from _collections_abc import Sequence
+from typing import Dict
 import matplotlib.pyplot as plt
+from .display_decos import plt_colors
 
-_PLT_CONFIGS = {"subplots_adjust":(.125,.11,.9,.9,.2,.55)}
+@plt_colors
+def _is_valid_color(colors :dict, user_color :str):
+    try:
+        colors[user_color]
+    except KeyError:
+        return False
+    return True
 
 def _configure_plot(configs :dict) -> None:
     for key, value in configs.items():
@@ -16,17 +23,25 @@ def _configure_plot(configs :dict) -> None:
 def _configure_graph(axis :plt.Axes, user_config :dict) -> None:
     axis.set(xlabel=user_config["xlabel"], ylabel=user_config["ylabel"],
             title=user_config["title"])
+
     axis.ticklabel_format(style='plain')
+    axis.grid()
     
     return None
 
-def _plot_graph(axes :plt.Axes, x, y) -> None:
-    axes.plot(x, y)
+def _plot_graph(axes :plt.Axes, user_config :dict, x :Sequence, y :Sequence) \
+            -> None:
+
+    if user_config["color"] and _is_valid_color(user_config["color"].lower()):
+        axes.plot(x, y, color=user_config["color"].lower())
+    else:
+        axes.plot(x, y)
 
     return None
 
 def _show_graph() -> None:
-    _configure_plot(_PLT_CONFIGS)
+    plt_configs = {"subplots_adjust":(.125,.11,.9,.9,.2,.55)}
+    _configure_plot(plt_configs)
     plt.show()
     
     return None
@@ -38,10 +53,10 @@ def graph(x_values :Sequence, y_values: Sequence, integrated_values : Sequence,
     for i in range(0, 2):
         if i == 0:
             _configure_graph(axs[i], source_config)
-            _plot_graph(axs[i], x_values, y_values)
+            _plot_graph(axs[i], source_config, x_values, y_values)
         elif i == 1:
             _configure_graph(axs[1], integrated_config)
-            _plot_graph(axs[i], x_values, integrated_values)
+            _plot_graph(axs[i], integrated_config, x_values, integrated_values)
 
     _show_graph()
 
