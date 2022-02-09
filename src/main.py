@@ -1,6 +1,7 @@
 from CommandLine.command_line_parser import CommandLineParser
-from DataFile.datafile import DataFile
-from DataFile.file_manager import load_file
+from file.datafile import DataFile
+from file.manage.load import  load_file
+
 from Integration import calculate
 from Utils import utils
 from Output import display
@@ -10,10 +11,10 @@ def main():
     data_file = DataFile(args.file)
     src_config = utils.get_graph_configs(args.source_graph)
     int_config = utils.get_graph_configs(args.integrated_graph)
-    x, y = load_file(data_file, (int(args.interval), int(args.data)))
-    i = calculate.integral(x, y)
+    x_vals, y_vals = load_file(data_file, (int(args.interval), int(args.data)))
+    i = calculate.integral(x_vals, y_vals)
     
-    display.graph(x, y, i, src_config, int_config)
+    display.graph(x_vals, y_vals, i, src_config, int_config)
 
     #TODO
     #Reorganize/Cleanup/Optimize/Docstrings
