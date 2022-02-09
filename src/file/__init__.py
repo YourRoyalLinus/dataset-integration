@@ -3,11 +3,12 @@
 Classes:
     datafile.DataFile
         - class to represent a file
-Subpackages:
-    manage
+Modules:
+    load
+        - contains functions to load the datafile into new data structures
 """
 
-from . import manage
 from . import datafile
+from . import load
 
-__all__ = ["datafile", "manage"]
+__all__ = ["datafile", "load"]

@@ -1,7 +1,7 @@
 import utils
 import calculations
 from file.datafile import DataFile
-from file.manage.load import  load_file
+from file.load import  load_file
 from graph import graph
 
 def main():
@@ -11,9 +11,6 @@ def main():
     i = calculations.integrate(x_vals, y_vals)
     
     graph.graph(x_vals, y_vals, i, args.source_graph, args.integrated_graph)
-
-    #TODO
-    #Reorganize/Cleanup/Optimize/Docstrings
     
 if __name__ == "__main__":
     main()   
